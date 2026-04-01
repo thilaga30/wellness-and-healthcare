@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard — WellHer</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body data-page="dashboard">
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <a href="index.html" class="nav-logo">💕 WellHer</a>
+  <ul class="nav-links">
+    <li><a href="index.html" data-lang="home">Home</a></li>
+    <li><a href="dashboard.html" class="active" data-lang="dashboard">Dashboard</a></li>
+    <li><a href="pregnancy.html" data-lang="pregnancyTracker">Pregnancy</a></li>
+    <li><a href="period.html" data-lang="periodTracker">Period</a></li>
+    <li><a href="diet.html" data-lang="dietPlan">Diet</a></li>
+    <li><a href="health.html" data-lang="healthIssues">Health</a></li>
+    <li><a href="yoga.html" data-lang="yogaWellness">Yoga</a></li>
+  </ul>
+  <div class="nav-actions">
+    <select id="langSelect" class="lang-select" onchange="setLang(this.value)">
+      <option value="en">🌐 EN</option>
+      <option value="ta">தமிழ்</option>
+      <option value="tanglish">Tanglish</option>
+      <option value="hi">हिंदी</option>
+    </select>
+    <button class="icon-btn" id="themeBtn" onclick="toggleTheme()">🌙</button>
+    <div class="notif-wrapper">
+      <button class="icon-btn" id="notifBell" onclick="toggleNotif()">🔔</button>
+      <div class="notif-dropdown" id="notifDropdown">
+        <div class="notif-header" data-lang="notifications">Notifications</div>
+        <div id="notifDropdownList"></div>
+      </div>
+    </div>
+    <button class="icon-btn hamburger" id="hamburger" onclick="toggleMobileNav()">☰</button>
+  </div>
+</nav>
+<div class="mobile-nav" id="mobileNav">
+  <a href="index.html" data-lang="home">🏠 Home</a>
+  <a href="dashboard.html" data-lang="dashboard">📊 Dashboard</a>
+  <a href="pregnancy.html" data-lang="pregnancyTracker">🤰 Pregnancy</a>
+  <a href="period.html" data-lang="periodTracker">🩸 Period Tracker</a>
+  <a href="diet.html" data-lang="dietPlan">🥗 Diet Plan</a>
+  <a href="health.html" data-lang="healthIssues">💊 Health Issues</a>
+  <a href="yoga.html" data-lang="yogaWellness">🧘 Yoga & Wellness</a>
+</div>
+
+<div class="page-container">
+
+  <!-- WELCOME BANNER -->
+  <div class="welcome-banner">
+    <div>
+      <h2 data-lang="welcome">Welcome, User 💕</h2>
+      <p>Here's your health overview for today. Stay healthy and happy! 🌸</p>
+    </div>
+    <span class="banner-emoji">🌸</span>
+  </div>
+
+  <!-- ALERTS -->
+  <div class="alert alert-red" id="dashDelayAlert" style="display:none;">
+    ⚠️ <span data-lang="delayAlert">Your period is delayed. Consult a doctor.</span>
+  </div>
+  <div class="alert alert-yellow" id="dashReminderAlert" style="display:none;">
+    🩸 <span data-lang="periodSoon">Period expected soon. Be prepared!</span>
+  </div>
+
+  <!-- STAT CARDS -->
+  <div class="grid-4" style="margin-bottom:1.5rem;">
+    <div class="stat-card coral">
+      <div class="stat-label" data-lang="lastPeriod">Last Period</div>
+      <div class="stat-value" id="dashLastPeriod">—</div>
+      <div class="stat-sub">Most recent cycle start</div>
+    </div>
+    <div class="stat-card blue">
+      <div class="stat-label" data-lang="nextPeriod">Next Period</div>
+      <div class="stat-value" id="dashNextPeriod">—</div>
+      <div class="stat-sub">Predicted next date</div>
+    </div>
+    <div class="stat-card mint">
+      <div class="stat-label" data-lang="pregnancy">Pregnancy Week</div>
+      <div class="stat-value" id="dashPregWeek">—</div>
+      <div class="stat-sub">Current week</div>
+    </div>
+    <div class="stat-card purple">
+      <div class="stat-label" data-lang="cycleLen">Cycle Length</div>
+      <div class="stat-value" id="dashCycleLen">28 days</div>
+      <div class="stat-sub">Average cycle</div>
+    </div>
+  </div>
+
+  <!-- NOTIFICATIONS + QUICK ACTIONS + MOOD -->
+  <div class="grid-3" style="margin-bottom:1.5rem;">
+    <div class="card">
+      <div class="card-title" data-lang="notifications">Notifications</div>
+      <div id="notifList"></div>
+    </div>
+    <div class="card">
+      <div class="card-title" data-lang="quickActions">Quick Actions</div>
+      <div style="display:flex;flex-direction:column;gap:0.6rem;">
+        <a href="pregnancy.html" class="btn btn-mint btn-sm" data-lang="trackPreg">🤰 Track Pregnancy</a>
+        <a href="period.html" class="btn btn-coral btn-sm" data-lang="logPeriod">🩸 Log Period</a>
+        <a href="diet.html" class="btn btn-primary btn-sm" data-lang="viewDiet">🥗 View Diet</a>
+        <a href="yoga.html" class="btn btn-outline btn-sm">🧘 Start Yoga</a>
+        <a href="health.html" class="btn btn-outline btn-sm">💊 Health Check</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title" data-lang="todayMood">Today's Mood</div>
+      <div style="text-align:center;">
+        <div class="mood-emoji" id="moodEmoji">😊</div>
+        <div class="mood-label" id="moodLabel">Happy</div>
+      </div>
+      <div class="mood-picker">
+        <span class="mood-opt" onclick="setMood(this,'😊','Happy')" title="Happy">😊</span>
+        <span class="mood-opt" onclick="setMood(this,'😢','Sad')" title="Sad">😢</span>
+        <span class="mood-opt" onclick="setMood(this,'😰','Anxious')" title="Anxious">😰</span>
+        <span class="mood-opt" onclick="setMood(this,'😌','Calm')" title="Calm">😌</span>
+        <span class="mood-opt" onclick="setMood(this,'😤','Irritable')" title="Irritable">😤</span>
+        <span class="mood-opt" onclick="setMood(this,'😴','Tired')" title="Tired">😴</span>
+        <span class="mood-opt" onclick="setMood(this,'⚡','Energetic')" title="Energetic">⚡</span>
+        <span class="mood-opt" onclick="setMood(this,'🥰','Loved')" title="Loved">🥰</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- WATER + SLEEP + CALENDAR -->
+  <div class="grid-3" style="margin-bottom:1.5rem;">
+    <div class="card">
+      <div class="card-title" data-lang="waterReminder">💧 Water Reminder</div>
+      <p style="font-size:0.83rem;color:var(--text-muted);margin-bottom:0.5rem;">Click each glass as you drink water throughout the day.</p>
+      <div class="water-glasses">
+        <button class="glass-btn" onclick="toggleGlass(0)">💧</button>
+        <button class="glass-btn" onclick="toggleGlass(1)">💧</button>
+        <button class="glass-btn" onclick="toggleGlass(2)">💧</button>
+        <button class="glass-btn" onclick="toggleGlass(3)">💧</button>
+        <button class="glass-btn" onclick="toggleGlass(4)">💧</button>
+        <button class="glass-btn" onclick="toggleGlass(5)">💧</button>
+        <button class="glass-btn" onclick="toggleGlass(6)">💧</button>
+        <button class="glass-btn" onclick="toggleGlass(7)">💧</button>
+      </div>
+      <div class="water-count" id="waterCount">0/8</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title" data-lang="sleepTracker">😴 Sleep Tracker</div>
+      <div class="sleep-display" id="sleepDisplay">7 hrs</div>
+      <div class="progress-bar"><div class="progress-fill mint" id="sleepBarFill" style="width:77%"></div></div>
+      <p style="font-size:0.78rem;color:var(--text-muted);margin:0.5rem 0;">Recommended: 7–9 hours</p>
+      <div class="form-group" style="margin-bottom:0.5rem;">
+        <label>Hours slept last night</label>
+        <input type="number" id="sleepInput" min="1" max="12" value="7" placeholder="e.g. 7" />
+      </div>
+      <button class="btn btn-primary btn-sm" onclick="saveSleep()" data-lang="saveBtn">Save</button>
+    </div>
+
+    <div class="card">
+      <div class="card-title">📅 Mini Calendar</div>
+      <div id="miniCal"></div>
+      <p style="font-size:0.75rem;color:var(--text-muted);margin-top:0.5rem;">
+        <span style="display:inline-block;width:10px;height:10px;background:var(--coral);border-radius:50%;margin-right:4px;"></span>Period days
+        <span style="display:inline-block;width:10px;height:10px;background:var(--blue);border-radius:50%;margin:0 4px 0 10px;"></span>Today
+      </p>
+    </div>
+  </div>
+
+  <!-- DAILY TIP + TIPS COLUMNS -->
+  <div class="grid-2" style="margin-bottom:1.5rem;">
+    <div class="card">
+      <div class="card-title" data-lang="healthTip">💡 Health Tip of the Day</div>
+      <p id="dailyTipText" style="font-size:0.92rem;color:var(--text-muted);line-height:1.7;">Loading tip...</p>
+      <button class="btn btn-outline btn-sm" style="margin-top:0.75rem;" onclick="showPopup('💡','Health Tip','Stay consistent with your health habits. Small daily actions lead to big results over time! 🌟')">Learn More</button>
+    </div>
+    <div class="card">
+      <div class="card-title" data-lang="dailyTips">🌿 Daily Health Tips</div>
+      <div class="grid-3" style="gap:0.75rem;">
+        <div style="text-align:center;padding:0.75rem;background:rgba(127,156,245,0.08);border-radius:var(--radius-sm);">
+          <div style="font-size:1.5rem;margin-bottom:0.3rem;">💧</div>
+          <div style="font-size:0.78rem;font-weight:600;color:var(--blue-dark);">Hydration</div>
+          <div style="font-size:0.75rem;color:var(--text-muted);">8 glasses daily</div>
+        </div>
+        <div style="text-align:center;padding:0.75rem;background:rgba(52,211,153,0.08);border-radius:var(--radius-sm);">
+          <div style="font-size:1.5rem;margin-bottom:0.3rem;">🏃‍♀️</div>
+          <div style="font-size:0.78rem;font-weight:600;color:var(--mint-dark);">Exercise</div>
+          <div style="font-size:0.75rem;color:var(--text-muted);">30 min walk</div>
+        </div>
+        <div style="text-align:center;padding:0.75rem;background:rgba(255,154,162,0.08);border-radius:var(--radius-sm);">
+          <div style="font-size:1.5rem;margin-bottom:0.3rem;">😴</div>
+          <div style="font-size:0.78rem;font-weight:600;color:var(--coral-dark);">Rest</div>
+          <div style="font-size:0.75rem;color:var(--text-muted);">7–9 hrs sleep</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- POPUP -->
+<div class="popup-overlay" id="popupOverlay">
+  <div class="popup-box">
+    <span class="popup-icon" id="popupIcon">💕</span>
+    <div class="popup-title" id="popupTitle">Hello!</div>
+    <div class="popup-msg" id="popupMessage">Welcome to WellHer.</div>
+    <button class="btn btn-primary" onclick="closePopup()" data-lang="gotIt">Got it</button>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

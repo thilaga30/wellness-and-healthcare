@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Diet Plan — WellHer</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body data-page="diet">
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <a href="index.html" class="nav-logo">💕 WellHer</a>
+  <ul class="nav-links">
+    <li><a href="index.html" data-lang="home">Home</a></li>
+    <li><a href="dashboard.html" data-lang="dashboard">Dashboard</a></li>
+    <li><a href="pregnancy.html" data-lang="pregnancyTracker">Pregnancy</a></li>
+    <li><a href="period.html" data-lang="periodTracker">Period</a></li>
+    <li><a href="diet.html" class="active" data-lang="dietPlan">Diet</a></li>
+    <li><a href="health.html" data-lang="healthIssues">Health</a></li>
+    <li><a href="yoga.html" data-lang="yogaWellness">Yoga</a></li>
+  </ul>
+  <div class="nav-actions">
+    <select id="langSelect" class="lang-select" onchange="setLang(this.value)">
+      <option value="en">🌐 EN</option>
+      <option value="ta">தமிழ்</option>
+      <option value="tanglish">Tanglish</option>
+      <option value="hi">हिंदी</option>
+    </select>
+    <button class="icon-btn" id="themeBtn" onclick="toggleTheme()">🌙</button>
+    <div class="notif-wrapper">
+      <button class="icon-btn" id="notifBell" onclick="toggleNotif()">🔔</button>
+      <div class="notif-dropdown" id="notifDropdown">
+        <div class="notif-header" data-lang="notifications">Notifications</div>
+        <div id="notifDropdownList">
+          <div class="notif-card"><span class="notif-icon">🥗</span><div class="notif-text"><strong>Diet Reminder</strong>Eat balanced meals with iron and calcium today.</div></div>
+          <div class="notif-card"><span class="notif-icon">💧</span><div class="notif-text"><strong>Hydration</strong>Drink 8 glasses of water today!</div></div>
+        </div>
+      </div>
+    </div>
+    <button class="icon-btn hamburger" id="hamburger" onclick="toggleMobileNav()">☰</button>
+  </div>
+</nav>
+<div class="mobile-nav" id="mobileNav">
+  <a href="index.html" data-lang="home">🏠 Home</a>
+  <a href="dashboard.html" data-lang="dashboard">📊 Dashboard</a>
+  <a href="pregnancy.html" data-lang="pregnancyTracker">🤰 Pregnancy</a>
+  <a href="period.html" data-lang="periodTracker">🩸 Period Tracker</a>
+  <a href="diet.html" data-lang="dietPlan">🥗 Diet Plan</a>
+  <a href="health.html" data-lang="healthIssues">💊 Health Issues</a>
+  <a href="yoga.html" data-lang="yogaWellness">🧘 Yoga & Wellness</a>
+</div>
+
+<div class="page-container">
+
+  <h1 class="section-title">🥗 <span>Diet & Nutrition</span></h1>
+
+  <!-- ALERT BANNER -->
+  <div class="alert alert-green" style="margin-bottom:1.5rem;">
+    🥦 <strong>Nutrition Reminder:</strong> A balanced diet rich in iron, calcium, and folate is essential for women's health at every stage.
+  </div>
+
+  <!-- PREGNANCY DIET -->
+  <div class="card" style="margin-bottom:1.5rem;">
+    <div class="card-title" data-lang="pregnancyDiet">🤰 Pregnancy Diet</div>
+    <div class="food-section">
+      <div class="food-card eat">
+        <h4 data-lang="eatThese">EAT THESE</h4>
+        <ul>
+          <li>Folic acid (spinach, lentils, fortified cereals)</li>
+          <li>Iron (red meat, beans, tofu, pumpkin seeds)</li>
+          <li>Calcium (milk, yogurt, cheese, broccoli)</li>
+          <li>Omega-3 (salmon, sardines, walnuts)</li>
+          <li>Vitamin D (eggs, fortified milk, sunlight)</li>
+          <li>Whole grains (oats, quinoa, brown rice)</li>
+          <li>Fresh fruits (berries, oranges, mangoes)</li>
+          <li>Lean protein (chicken, eggs, legumes)</li>
+        </ul>
+      </div>
+      <div class="food-card avoid">
+        <h4 data-lang="avoidThese">AVOID THESE</h4>
+        <ul>
+          <li>Raw/undercooked meat and eggs</li>
+          <li>High-mercury fish (shark, king mackerel)</li>
+          <li>Unpasteurized cheeses and juices</li>
+          <li>Alcohol (no safe amount in pregnancy)</li>
+          <li>Excess caffeine (max 200mg/day)</li>
+          <li>Deli meats and hot dogs (listeria risk)</li>
+          <li>Raw sprouts (bacterial contamination)</li>
+          <li>Artificial sweeteners in excess</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- PERIOD DIET -->
+  <div class="card" style="margin-bottom:1.5rem;">
+    <div class="card-title" data-lang="periodDiet">🩸 Period Diet</div>
+    <div class="food-section">
+      <div class="food-card eat">
+        <h4 data-lang="eatThese">EAT THESE</h4>
+        <ul>
+          <li>Iron-rich foods (spinach, lentils, red meat)</li>
+          <li>Magnesium (dark chocolate, almonds, avocado)</li>
+          <li>Omega-3 (flaxseed, chia seeds, salmon)</li>
+          <li>Ginger and turmeric (anti-inflammatory)</li>
+          <li>Bananas (potassium, reduces bloating)</li>
+          <li>Chamomile and ginger tea</li>
+          <li>Complex carbs (sweet potato, oats)</li>
+          <li>Vitamin C (citrus, bell peppers)</li>
+        </ul>
+      </div>
+      <div class="food-card avoid">
+        <h4 data-lang="avoidThese">AVOID THESE</h4>
+        <ul>
+          <li>Salty snacks (increase water retention)</li>
+          <li>Caffeine (worsens cramps and anxiety)</li>
+          <li>Alcohol (disrupts hormones)</li>
+          <li>Sugary foods (blood sugar spikes)</li>
+          <li>Fried and processed foods</li>
+          <li>Carbonated drinks (worsen bloating)</li>
+          <li>Excess dairy (can increase prostaglandins)</li>
+          <li>Spicy foods if sensitive</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- GENERAL DIET -->
+  <div class="card" style="margin-bottom:1.5rem;">
+    <div class="card-title" data-lang="generalDiet">🌿 General Women's Diet</div>
+    <div class="grid-3">
+      <div>
+        <div class="health-sub-title" style="color:var(--mint-dark);">✅ Daily Essentials</div>
+        <ul class="item-list">
+          <li>🥬 Leafy greens (spinach, kale)</li>
+          <li>🫐 Berries (antioxidants)</li>
+          <li>🥚 Eggs (protein + vitamin D)</li>
+          <li>🥛 Dairy or fortified alternatives</li>
+          <li>🌾 Whole grains (fiber)</li>
+          <li>🥜 Nuts and seeds (healthy fats)</li>
+          <li>🐟 Fatty fish (omega-3)</li>
+          <li>💧 8+ glasses of water</li>
+        </ul>
+      </div>
+      <div>
+        <div class="health-sub-title" style="color:var(--coral-dark);">❌ Always Avoid</div>
+        <ul class="item-list">
+          <li>🍟 Deep fried foods</li>
+          <li>🍭 Excess sugar and sweets</li>
+          <li>🥤 Sugary sodas and juices</li>
+          <li>🍕 Ultra-processed foods</li>
+          <li>🧂 Excess sodium (salt)</li>
+          <li>🍺 Alcohol</li>
+          <li>☕ Excess caffeine (3+ cups)</li>
+          <li>🍬 Artificial sweeteners daily</li>
+        </ul>
+      </div>
+      <div>
+        <div class="health-sub-title" style="color:var(--blue-dark);">💊 Key Nutrients</div>
+        <ul class="item-list">
+          <li>🩸 Iron — prevents anemia</li>
+          <li>🦴 Calcium — bone health</li>
+          <li>🌿 Folate — cell growth</li>
+          <li>☀️ Vitamin D — immunity</li>
+          <li>🐟 Omega-3 — heart health</li>
+          <li>🥦 Magnesium — muscle function</li>
+          <li>🍊 Vitamin C — iron absorption</li>
+          <li>🫀 B12 — nerve health</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- WEEKLY DIET CHART -->
+  <div class="card" style="margin-bottom:1.5rem;">
+    <div class="card-title" data-lang="weeklyDiet">📅 Weekly Diet Chart</div>
+    <div style="overflow-x:auto;">
+      <table class="diet-table">
+        <thead>
+          <tr>
+            <th>Day</th>
+            <th>Breakfast</th>
+            <th>Lunch</th>
+            <th>Dinner</th>
+            <th>Snack</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Monday</strong></td><td>Oats + banana + milk</td><td>Brown rice + dal + spinach</td><td>Grilled chicken + veggies</td><td>Almonds + apple</td></tr>
+          <tr><td><strong>Tuesday</strong></td><td>Eggs + whole wheat toast</td><td>Quinoa salad + chickpeas</td><td>Fish curry + brown rice</td><td>Yogurt + berries</td></tr>
+          <tr><td><strong>Wednesday</strong></td><td>Smoothie (spinach, banana, milk)</td><td>Lentil soup + roti</td><td>Tofu stir-fry + noodles</td><td>Walnuts + orange</td></tr>
+          <tr><td><strong>Thursday</strong></td><td>Idli + sambar + chutney</td><td>Rajma + rice + salad</td><td>Grilled salmon + sweet potato</td><td>Hummus + carrots</td></tr>
+          <tr><td><strong>Friday</strong></td><td>Poha + peanuts + lemon</td><td>Paneer curry + roti</td><td>Chicken soup + bread</td><td>Dark chocolate + nuts</td></tr>
+          <tr><td><strong>Saturday</strong></td><td>Upma + coconut chutney</td><td>Mixed veg rice + raita</td><td>Egg curry + brown rice</td><td>Fruit salad</td></tr>
+          <tr><td><strong>Sunday</strong></td><td>Pancakes + honey + fruits</td><td>Biryani (light) + salad</td><td>Soup + whole grain bread</td><td>Smoothie bowl</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- EXERCISE & WELLNESS -->
+  <div class="card" style="margin-bottom:1.5rem;">
+    <div class="card-title" data-lang="exerciseWellness">🏃‍♀️ Exercise & Wellness</div>
+    <div class="grid-3">
+      <div style="padding:1rem;background:rgba(127,156,245,0.08);border-radius:var(--radius-sm);">
+        <div style="font-size:1.8rem;margin-bottom:0.4rem;">🚶‍♀️</div>
+        <div style="font-weight:600;font-size:0.9rem;margin-bottom:0.3rem;">Daily Walking</div>
+        <div style="font-size:0.8rem;color:var(--text-muted);">30 minutes of brisk walking improves circulation, mood, and metabolism. Best done in the morning.</div>
+      </div>
+      <div style="padding:1rem;background:rgba(52,211,153,0.08);border-radius:var(--radius-sm);">
+        <div style="font-size:1.8rem;margin-bottom:0.4rem;">🧘‍♀️</div>
+        <div style="font-weight:600;font-size:0.9rem;margin-bottom:0.3rem;">Yoga & Stretching</div>
+        <div style="font-size:0.8rem;color:var(--text-muted);">15–20 minutes of yoga reduces stress, improves flexibility, and balances hormones naturally.</div>
+      </div>
+      <div style="padding:1rem;background:rgba(255,154,162,0.08);border-radius:var(--radius-sm);">
+        <div style="font-size:1.8rem;margin-bottom:0.4rem;">💪</div>
+        <div style="font-weight:600;font-size:0.9rem;margin-bottom:0.3rem;">Strength Training</div>
+        <div style="font-size:0.8rem;color:var(--text-muted);">Light resistance training 2–3x/week builds bone density and muscle strength. Essential for women over 30.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SAMPLE MEAL PLAN -->
+  <div class="card" style="margin-bottom:1.5rem;">
+    <div class="card-title" data-lang="mealPlan">🍽️ Sample Daily Meal Plan</div>
+    <div class="grid-2">
+      <div>
+        <div class="health-sub-title">🌅 Morning Routine</div>
+        <ul class="item-list">
+          <li>🌊 Wake up: 1 glass warm water with lemon</li>
+          <li>🧘 7:00 AM: 15 min yoga or stretching</li>
+          <li>🥣 8:00 AM: Oats with fruits and nuts</li>
+          <li>☕ 9:00 AM: Green tea or herbal tea</li>
+          <li>🍎 11:00 AM: Mid-morning snack (fruit)</li>
+        </ul>
+      </div>
+      <div>
+        <div class="health-sub-title">🌙 Evening Routine</div>
+        <ul class="item-list">
+          <li>🥗 1:00 PM: Balanced lunch with protein + veggies</li>
+          <li>🥜 4:00 PM: Healthy snack (nuts, yogurt)</li>
+          <li>🚶 5:00 PM: 30-min walk or exercise</li>
+          <li>🍲 7:30 PM: Light dinner (soup, salad, protein)</li>
+          <li>🌙 9:00 PM: Warm milk with turmeric</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- WATER REMINDER -->
+  <div class="card" style="margin-bottom:1.5rem;">
+    <div class="card-title" data-lang="waterReminder">💧 Water Reminder</div>
+    <div class="alert alert-blue">
+      💧 <strong>Daily Goal:</strong> Drink at least 8–10 glasses (2–2.5 liters) of water daily. During pregnancy, increase to 10–12 glasses. During periods, warm water helps reduce cramps.
+    </div>
+    <div class="grid-4" style="margin-top:1rem;">
+      <div style="text-align:center;padding:0.75rem;background:rgba(127,156,245,0.08);border-radius:var(--radius-sm);">
+        <div style="font-size:1.5rem;">🌅</div><div style="font-size:0.78rem;font-weight:600;margin-top:0.3rem;">Morning</div><div style="font-size:0.75rem;color:var(--text-muted);">2 glasses</div>
+      </div>
+      <div style="text-align:center;padding:0.75rem;background:rgba(52,211,153,0.08);border-radius:var(--radius-sm);">
+        <div style="font-size:1.5rem;">☀️</div><div style="font-size:0.78rem;font-weight:600;margin-top:0.3rem;">Afternoon</div><div style="font-size:0.75rem;color:var(--text-muted);">3 glasses</div>
+      </div>
+      <div style="text-align:center;padding:0.75rem;background:rgba(255,154,162,0.08);border-radius:var(--radius-sm);">
+        <div style="font-size:1.5rem;">🌆</div><div style="font-size:0.78rem;font-weight:600;margin-top:0.3rem;">Evening</div><div style="font-size:0.75rem;color:var(--text-muted);">2 glasses</div>
+      </div>
+      <div style="text-align:center;padding:0.75rem;background:rgba(196,181,253,0.08);border-radius:var(--radius-sm);">
+        <div style="font-size:1.5rem;">🌙</div><div style="font-size:0.78rem;font-weight:600;margin-top:0.3rem;">Night</div><div style="font-size:0.75rem;color:var(--text-muted);">1 glass</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- POPUP -->
+<div class="popup-overlay" id="popupOverlay">
+  <div class="popup-box">
+    <span class="popup-icon" id="popupIcon">🥗</span>
+    <div class="popup-title" id="popupTitle">Diet Info</div>
+    <div class="popup-msg" id="popupMessage">Loading...</div>
+    <button class="btn btn-mint" onclick="closePopup()" data-lang="gotIt">Got it</button>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

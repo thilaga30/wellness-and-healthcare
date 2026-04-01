@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pregnancy Tracker — WellHer</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body data-page="pregnancy">
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <a href="index.html" class="nav-logo">💕 WellHer</a>
+  <ul class="nav-links">
+    <li><a href="index.html" data-lang="home">Home</a></li>
+    <li><a href="dashboard.html" data-lang="dashboard">Dashboard</a></li>
+    <li><a href="pregnancy.html" class="active" data-lang="pregnancyTracker">Pregnancy</a></li>
+    <li><a href="period.html" data-lang="periodTracker">Period</a></li>
+    <li><a href="diet.html" data-lang="dietPlan">Diet</a></li>
+    <li><a href="health.html" data-lang="healthIssues">Health</a></li>
+    <li><a href="yoga.html" data-lang="yogaWellness">Yoga</a></li>
+  </ul>
+  <div class="nav-actions">
+    <select id="langSelect" class="lang-select" onchange="setLang(this.value)">
+      <option value="en">🌐 EN</option>
+      <option value="ta">தமிழ்</option>
+      <option value="tanglish">Tanglish</option>
+      <option value="hi">हिंदी</option>
+    </select>
+    <button class="icon-btn" id="themeBtn" onclick="toggleTheme()">🌙</button>
+    <div class="notif-wrapper">
+      <button class="icon-btn" id="notifBell" onclick="toggleNotif()">🔔</button>
+      <div class="notif-dropdown" id="notifDropdown">
+        <div class="notif-header" data-lang="notifications">Notifications</div>
+        <div id="notifDropdownList">
+          <div class="notif-card"><span class="notif-icon">🤰</span><div class="notif-text"><strong>Pregnancy Tip</strong>Take folic acid daily during first trimester.</div></div>
+          <div class="notif-card"><span class="notif-icon">💧</span><div class="notif-text"><strong>Hydration</strong>Drink extra water — you need more during pregnancy.</div></div>
+        </div>
+      </div>
+    </div>
+    <button class="icon-btn hamburger" id="hamburger" onclick="toggleMobileNav()">☰</button>
+  </div>
+</nav>
+<div class="mobile-nav" id="mobileNav">
+  <a href="index.html" data-lang="home">🏠 Home</a>
+  <a href="dashboard.html" data-lang="dashboard">📊 Dashboard</a>
+  <a href="pregnancy.html" data-lang="pregnancyTracker">🤰 Pregnancy</a>
+  <a href="period.html" data-lang="periodTracker">🩸 Period Tracker</a>
+  <a href="diet.html" data-lang="dietPlan">🥗 Diet Plan</a>
+  <a href="health.html" data-lang="healthIssues">💊 Health Issues</a>
+  <a href="yoga.html" data-lang="yogaWellness">🧘 Yoga & Wellness</a>
+</div>
+
+<div class="page-container">
+
+  <h1 class="section-title">🤰 <span>Pregnancy Tracker</span></h1>
+
+  <!-- INPUT CARD -->
+  <div class="card" style="margin-bottom:1.5rem;">
+    <div class="card-title" data-lang="lmpLabel">Last Menstrual Period Date</div>
+    <div class="input-row">
+      <div class="form-group">
+        <label data-lang="lmpLabel">Last Menstrual Period (LMP) Date</label>
+        <input type="date" id="lmpDate" />
+      </div>
+      <button class="btn btn-outline btn-sm" onclick="initVoice('lmpDate')" title="Voice Input">🎤</button>
+      <button class="btn btn-primary" onclick="calculatePregnancy()" data-lang="calcBtn">Calculate</button>
+    </div>
+  </div>
+
+  <!-- RESULTS (hidden until calculated) -->
+  <div id="pregResults" style="display:none;">
+
+    <!-- STAT CARDS -->
+    <div class="grid-3" style="margin-bottom:1.5rem;">
+      <div class="stat-card blue">
+        <div class="stat-label" data-lang="currentWeek">Current Week</div>
+        <div class="stat-value" id="pregWeek">—</div>
+        <div class="stat-sub">of 40 weeks total</div>
+      </div>
+      <div class="stat-card mint">
+        <div class="stat-label" data-lang="trimester">Trimester</div>
+        <div class="stat-value" id="pregTrimester">—</div>
+        <div class="stat-sub">Current trimester</div>
+      </div>
+      <div class="stat-card coral">
+        <div class="stat-label" data-lang="deliveryDate">Estimated Delivery Date</div>
+        <div class="stat-value" id="pregDelivery">—</div>
+        <div class="stat-sub">Due date (EDD)</div>
+      </div>
+    </div>
+
+    <!-- PROGRESS BAR -->
+    <div class="card" style="margin-bottom:1.5rem;">
+      <div class="card-title">📈 Pregnancy Progress</div>
+      <div style="display:flex;justify-content:space-between;font-size:0.82rem;color:var(--text-muted);margin-bottom:0.4rem;">
+        <span>Week 1</span><span id="pregPct">0%</span><span>Week 40</span>
+      </div>
+      <div class="progress-bar" style="height:14px;">
+        <div class="progress-fill" id="pregBarFill" style="width:0%"></div>
+      </div>
+      <p style="font-size:0.82rem;color:var(--text-muted);margin-top:0.5rem;">Your pregnancy journey progress</p>
+    </div>
+
+    <!-- BABY SIZE -->
+    <div class="card" style="margin-bottom:1.5rem;text-align:center;">
+      <div class="card-title">👶 Baby Size This Week</div>
+      <p id="babySize" style="font-size:1.1rem;font-weight:600;color:var(--blue-dark);padding:1rem 0;">—</p>
+    </div>
+
+    <!-- WARNINGS -->
+    <div class="card" style="margin-bottom:1.5rem;">
+      <div class="card-title">⚠️ Warning Signs — Seek Help Immediately</div>
+      <ul class="item-list" id="pregWarnings"></ul>
+    </div>
+
+  </div>
+
+  <!-- PREGNANCY DIET -->
+  <div class="card" style="margin-bottom:1.5rem;">
+    <div class="card-title" data-lang="pregnancyDiet">🥗 Pregnancy Diet Guide</div>
+    <div class="food-section">
+      <div class="food-card eat">
+        <h4 data-lang="eatThese">EAT THESE</h4>
+        <ul>
+          <li>Folic acid rich foods (spinach, lentils)</li>
+          <li>Iron-rich foods (red meat, beans)</li>
+          <li>Calcium sources (milk, yogurt, cheese)</li>
+          <li>Omega-3 (salmon, walnuts, flaxseed)</li>
+          <li>Whole grains (oats, brown rice)</li>
+          <li>Fresh fruits and vegetables</li>
+          <li>Lean protein (chicken, eggs, tofu)</li>
+          <li>Plenty of water (10+ glasses)</li>
+        </ul>
+      </div>
+      <div class="food-card avoid">
+        <h4 data-lang="avoidThese">AVOID THESE</h4>
+        <ul>
+          <li>Raw or undercooked meat/fish</li>
+          <li>Unpasteurized dairy products</li>
+          <li>High-mercury fish (shark, swordfish)</li>
+          <li>Alcohol and smoking</li>
+          <li>Excess caffeine (limit to 200mg/day)</li>
+          <li>Raw sprouts and unwashed produce</li>
+          <li>Processed and junk food</li>
+          <li>Artificial sweeteners in excess</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SAFE EXERCISES -->
+  <div class="card" style="margin-bottom:1.5rem;">
+    <div class="card-title">🏃‍♀️ Safe Exercises During Pregnancy</div>
+    <div class="grid-3">
+      <div style="padding:1rem;background:rgba(127,156,245,0.08);border-radius:var(--radius-sm);text-align:center;">
+        <div style="font-size:1.8rem;margin-bottom:0.4rem;">🚶‍♀️</div>
+        <div style="font-weight:600;font-size:0.88rem;">Walking</div>
+        <div style="font-size:0.78rem;color:var(--text-muted);">30 min daily, low impact</div>
+      </div>
+      <div style="padding:1rem;background:rgba(52,211,153,0.08);border-radius:var(--radius-sm);text-align:center;">
+        <div style="font-size:1.8rem;margin-bottom:0.4rem;">🏊‍♀️</div>
+        <div style="font-weight:600;font-size:0.88rem;">Swimming</div>
+        <div style="font-size:0.78rem;color:var(--text-muted);">Gentle, full body workout</div>
+      </div>
+      <div style="padding:1rem;background:rgba(255,154,162,0.08);border-radius:var(--radius-sm);text-align:center;">
+        <div style="font-size:1.8rem;margin-bottom:0.4rem;">🧘‍♀️</div>
+        <div style="font-weight:600;font-size:0.88rem;">Prenatal Yoga</div>
+        <div style="font-size:0.78rem;color:var(--text-muted);">Flexibility and breathing</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TRIMESTER GUIDE -->
+  <div class="card" style="margin-bottom:1.5rem;">
+    <div class="card-title">📖 Trimester Guide</div>
+    <div class="trimester-section t1">
+      <h4>🌱 First Trimester (Weeks 1–12)</h4>
+      <p>Baby's organs begin forming. You may experience morning sickness, fatigue, and breast tenderness. Take folic acid daily. Avoid alcohol and smoking. Schedule your first prenatal visit.</p>
+    </div>
+    <div class="trimester-section t2">
+      <h4>🌸 Second Trimester (Weeks 13–26)</h4>
+      <p>Most women feel better now. Baby starts moving! You'll have more energy. Focus on iron and calcium intake. Start prenatal yoga. Baby's gender can be determined around week 20.</p>
+    </div>
+    <div class="trimester-section t3">
+      <h4>🌺 Third Trimester (Weeks 27–40)</h4>
+      <p>Baby grows rapidly. You may feel back pain and shortness of breath. Prepare your hospital bag. Practice breathing exercises. Watch for signs of labor. Rest as much as possible.</p>
+    </div>
+  </div>
+
+  <!-- RECOMMENDED YOGA -->
+  <div class="card" style="margin-bottom:1.5rem;">
+    <div class="card-title">🧘 Recommended Pregnancy Yoga</div>
+    <div class="grid-3">
+      <div class="yoga-card">
+        <span class="yoga-icon">🐄</span>
+        <h3>Cat-Cow Stretch</h3>
+        <p>Gentle spinal movement that relieves back pain and improves posture during pregnancy.</p>
+        <div class="yoga-timers">
+          <button class="timer-btn" id="timer_catcow_30" onclick="startYogaTimer('timer_catcow_30',30)">▶ 30 sec</button>
+          <button class="timer-btn" id="timer_catcow_60" onclick="startYogaTimer('timer_catcow_60',60)">▶ 1 min</button>
+        </div>
+      </div>
+      <div class="yoga-card">
+        <span class="yoga-icon">🧘</span>
+        <h3>Seated Forward Bend</h3>
+        <p>Stretches the hamstrings and lower back. Calms the mind and reduces anxiety.</p>
+        <div class="yoga-timers">
+          <button class="timer-btn" id="timer_sfb_30" onclick="startYogaTimer('timer_sfb_30',30)">▶ 30 sec</button>
+          <button class="timer-btn" id="timer_sfb_60" onclick="startYogaTimer('timer_sfb_60',60)">▶ 1 min</button>
+        </div>
+      </div>
+      <div class="yoga-card">
+        <span class="yoga-icon">🌬️</span>
+        <h3>Breathing Exercise</h3>
+        <p>Deep breathing reduces stress, improves oxygen flow to baby, and prepares for labor.</p>
+        <div class="yoga-timers">
+          <button class="timer-btn" id="timer_breath_30" onclick="startYogaTimer('timer_breath_30',30)">▶ 30 sec</button>
+          <button class="timer-btn" id="timer_breath_60" onclick="startYogaTimer('timer_breath_60',60)">▶ 1 min</button>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:1rem;">
+      <a href="yoga.html" class="btn btn-primary">View All Yoga Poses →</a>
+    </div>
+  </div>
+
+</div>
+
+<!-- POPUP -->
+<div class="popup-overlay" id="popupOverlay">
+  <div class="popup-box">
+    <span class="popup-icon" id="popupIcon">🤰</span>
+    <div class="popup-title" id="popupTitle">Pregnancy Info</div>
+    <div class="popup-msg" id="popupMessage">Loading...</div>
+    <button class="btn btn-primary" onclick="closePopup()" data-lang="gotIt">Got it</button>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

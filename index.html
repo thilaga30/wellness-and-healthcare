@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Women Health Companion</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body data-page="index">
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <a href="index.html" class="nav-logo">💕 WellHer</a>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active" data-lang="home">Home</a></li>
+    <li><a href="dashboard.html" data-lang="dashboard">Dashboard</a></li>
+    <li><a href="pregnancy.html" data-lang="pregnancyTracker">Pregnancy</a></li>
+    <li><a href="period.html" data-lang="periodTracker">Period</a></li>
+    <li><a href="diet.html" data-lang="dietPlan">Diet</a></li>
+    <li><a href="health.html" data-lang="healthIssues">Health</a></li>
+    <li><a href="yoga.html" data-lang="yogaWellness">Yoga</a></li>
+  </ul>
+  <div class="nav-actions">
+    <select id="langSelect" class="lang-select" onchange="setLang(this.value)">
+      <option value="en">🌐 EN</option>
+      <option value="ta">தமிழ்</option>
+      <option value="tanglish">Tanglish</option>
+      <option value="hi">हिंदी</option>
+    </select>
+    <button class="icon-btn" id="themeBtn" onclick="toggleTheme()" title="Toggle Dark Mode">🌙</button>
+    <div class="notif-wrapper">
+      <button class="icon-btn" id="notifBell" onclick="toggleNotif()" title="Notifications">🔔</button>
+      <div class="notif-dropdown" id="notifDropdown">
+        <div class="notif-header" data-lang="notifications">Notifications</div>
+        <div id="notifDropdownList">
+          <div class="notif-card"><span class="notif-icon">💧</span><div class="notif-text"><strong>Water Reminder</strong>Stay hydrated — drink 8 glasses today!</div></div>
+          <div class="notif-card"><span class="notif-icon">🧘</span><div class="notif-text"><strong>Yoga Time</strong>Try a 10-minute yoga session for wellness.</div></div>
+          <div class="notif-card"><span class="notif-icon">🥗</span><div class="notif-text"><strong>Nutrition Tip</strong>Include iron and folate-rich foods today.</div></div>
+        </div>
+      </div>
+    </div>
+    <button class="icon-btn hamburger" id="hamburger" onclick="toggleMobileNav()">☰</button>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav">
+  <a href="index.html" data-lang="home">🏠 Home</a>
+  <a href="dashboard.html" data-lang="dashboard">📊 Dashboard</a>
+  <a href="pregnancy.html" data-lang="pregnancyTracker">🤰 Pregnancy</a>
+  <a href="period.html" data-lang="periodTracker">🩸 Period Tracker</a>
+  <a href="diet.html" data-lang="dietPlan">🥗 Diet Plan</a>
+  <a href="health.html" data-lang="healthIssues">💊 Health Issues</a>
+  <a href="yoga.html" data-lang="yogaWellness">🧘 Yoga & Wellness</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-blob hero-blob-1"></div>
+  <div class="hero-blob hero-blob-2"></div>
+  <div class="hero-blob hero-blob-3"></div>
+  <div class="hero-content animate-fadeUp">
+    <span class="hero-badge">✨ Your Complete Women's Health App</span>
+    <h1>Women Health<br/>Companion 💕</h1>
+    <p>Track your cycle, monitor pregnancy, plan your diet, practice yoga, and stay on top of your health — all in one beautiful app.</p>
+    <div class="hero-btns">
+      <a href="dashboard.html" class="btn btn-primary">🚀 Get Started</a>
+      <a href="pregnancy.html" class="btn btn-mint">🤰 Pregnancy</a>
+      <a href="period.html" class="btn btn-coral">🩸 Period</a>
+      <a href="diet.html" class="btn btn-outline">🥗 Diet</a>
+      <a href="health.html" class="btn btn-outline">💊 Health</a>
+      <a href="yoga.html" class="btn btn-outline">🧘 Yoga</a>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES SECTION -->
+<div class="page-container">
+  <h2 class="section-title" style="text-align:center; margin-bottom:2rem;">Everything You Need for <span>Women's Wellness</span></h2>
+  <div class="grid-3" style="margin-bottom:3rem;">
+    <a href="dashboard.html" class="feature-card animate-fadeUp">
+      <span class="feature-icon">📊</span>
+      <h3>Smart Dashboard</h3>
+      <p>Get a complete overview of your health stats, upcoming period, pregnancy week, and daily wellness tips.</p>
+      <span class="feature-arrow">Explore →</span>
+    </a>
+    <a href="pregnancy.html" class="feature-card animate-fadeUp">
+      <span class="feature-icon">🤰</span>
+      <h3>Pregnancy Tracker</h3>
+      <p>Track your pregnancy week by week, see baby size updates, get trimester guides and safe exercise tips.</p>
+      <span class="feature-arrow">Explore →</span>
+    </a>
+    <a href="period.html" class="feature-card animate-fadeUp">
+      <span class="feature-icon">🩸</span>
+      <h3>Period Tracker</h3>
+      <p>Log your cycle, predict next period, track symptoms, monitor mood, and get personalized reminders.</p>
+      <span class="feature-arrow">Explore →</span>
+    </a>
+    <a href="diet.html" class="feature-card animate-fadeUp">
+      <span class="feature-icon">🥗</span>
+      <h3>Diet & Nutrition</h3>
+      <p>Discover what to eat and avoid during pregnancy and periods. Get weekly meal plans and nutrition tips.</p>
+      <span class="feature-arrow">Explore →</span>
+    </a>
+    <a href="health.html" class="feature-card animate-fadeUp">
+      <span class="feature-icon">💊</span>
+      <h3>Health Issues</h3>
+      <p>Learn about PCOS, Anemia, Thyroid, and Stress. Take a self-check quiz to understand your health better.</p>
+      <span class="feature-arrow">Explore →</span>
+    </a>
+    <a href="yoga.html" class="feature-card animate-fadeUp">
+      <span class="feature-icon">🧘</span>
+      <h3>Yoga & Wellness</h3>
+      <p>Practice yoga poses for period relief, pregnancy support, and general wellness with built-in timers.</p>
+      <span class="feature-arrow">Explore →</span>
+    </a>
+  </div>
+
+  <!-- WHY US -->
+  <h2 class="section-title" style="text-align:center; margin-bottom:2rem;">Why Choose <span>WellHer?</span></h2>
+  <div class="grid-3" style="margin-bottom:3rem;">
+    <div class="benefit-card animate-fadeUp">
+      <span class="benefit-icon">🔒</span>
+      <h3>100% Private</h3>
+      <p>All your health data stays on your device. No accounts, no servers, no data sharing. Your privacy is our priority.</p>
+    </div>
+    <div class="benefit-card animate-fadeUp">
+      <span class="benefit-icon">🌍</span>
+      <h3>Multi-Language</h3>
+      <p>Available in English, Tamil, Tanglish, and Hindi so every woman can access health information in her language.</p>
+    </div>
+    <div class="benefit-card animate-fadeUp">
+      <span class="benefit-icon">📱</span>
+      <h3>Works Everywhere</h3>
+      <p>Fully responsive design that works beautifully on mobile, tablet, and desktop. No app download needed.</p>
+    </div>
+  </div>
+
+  <!-- QUICK STATS BANNER -->
+  <div class="welcome-banner" style="margin-bottom:2rem;">
+    <div>
+      <h2>Start Your Wellness Journey Today 🌸</h2>
+      <p>Track, learn, and grow with WellHer — your personal women's health companion.</p>
+    </div>
+    <a href="dashboard.html" class="btn" style="background:white;color:#5a7de8;font-weight:700;">Open Dashboard →</a>
+  </div>
+</div>
+
+<!-- POPUP -->
+<div class="popup-overlay" id="popupOverlay">
+  <div class="popup-box">
+    <span class="popup-icon" id="popupIcon">💕</span>
+    <div class="popup-title" id="popupTitle">Hello!</div>
+    <div class="popup-msg" id="popupMessage">Welcome to WellHer.</div>
+    <button class="btn btn-primary" onclick="closePopup()" data-lang="gotIt">Got it</button>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

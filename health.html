@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Health Issues — WellHer</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body data-page="health">
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <a href="index.html" class="nav-logo">💕 WellHer</a>
+  <ul class="nav-links">
+    <li><a href="index.html" data-lang="home">Home</a></li>
+    <li><a href="dashboard.html" data-lang="dashboard">Dashboard</a></li>
+    <li><a href="pregnancy.html" data-lang="pregnancyTracker">Pregnancy</a></li>
+    <li><a href="period.html" data-lang="periodTracker">Period</a></li>
+    <li><a href="diet.html" data-lang="dietPlan">Diet</a></li>
+    <li><a href="health.html" class="active" data-lang="healthIssues">Health</a></li>
+    <li><a href="yoga.html" data-lang="yogaWellness">Yoga</a></li>
+  </ul>
+  <div class="nav-actions">
+    <select id="langSelect" class="lang-select" onchange="setLang(this.value)">
+      <option value="en">🌐 EN</option>
+      <option value="ta">தமிழ்</option>
+      <option value="tanglish">Tanglish</option>
+      <option value="hi">हिंदी</option>
+    </select>
+    <button class="icon-btn" id="themeBtn" onclick="toggleTheme()">🌙</button>
+    <div class="notif-wrapper">
+      <button class="icon-btn" id="notifBell" onclick="toggleNotif()">🔔</button>
+      <div class="notif-dropdown" id="notifDropdown">
+        <div class="notif-header" data-lang="notifications">Notifications</div>
+        <div id="notifDropdownList">
+          <div class="notif-card"><span class="notif-icon">💊</span><div class="notif-text"><strong>Health Tip</strong>Regular check-ups help detect issues early.</div></div>
+          <div class="notif-card"><span class="notif-icon">🧘</span><div class="notif-text"><strong>Stress Relief</strong>Try 5 minutes of deep breathing today.</div></div>
+        </div>
+      </div>
+    </div>
+    <button class="icon-btn hamburger" id="hamburger" onclick="toggleMobileNav()">☰</button>
+  </div>
+</nav>
+<div class="mobile-nav" id="mobileNav">
+  <a href="index.html" data-lang="home">🏠 Home</a>
+  <a href="dashboard.html" data-lang="dashboard">📊 Dashboard</a>
+  <a href="pregnancy.html" data-lang="pregnancyTracker">🤰 Pregnancy</a>
+  <a href="period.html" data-lang="periodTracker">🩸 Period Tracker</a>
+  <a href="diet.html" data-lang="dietPlan">🥗 Diet Plan</a>
+  <a href="health.html" data-lang="healthIssues">💊 Health Issues</a>
+  <a href="yoga.html" data-lang="yogaWellness">🧘 Yoga & Wellness</a>
+</div>
+
+<div class="page-container">
+
+  <h1 class="section-title">💊 <span>Women's Health Issues</span></h1>
+
+  <!-- ALERT -->
+  <div class="alert alert-blue" style="margin-bottom:1.5rem;">
+    ℹ️ <strong>Disclaimer:</strong> This information is for educational purposes only. Always consult a qualified healthcare professional for diagnosis and treatment.
+  </div>
+
+  <!-- HEALTH TOPIC CARDS -->
+  <div class="grid-2" style="margin-bottom:1.5rem;">
+
+    <!-- PCOS -->
+    <div class="health-card pcos">
+      <span class="health-card-icon">🔴</span>
+      <h3>PCOS — Polycystic Ovary Syndrome</h3>
+      <div class="health-sub-title">Symptoms</div>
+      <ul class="health-list">
+        <li>Irregular or missed periods</li>
+        <li>Excess hair growth (face, body)</li>
+        <li>Acne and oily skin</li>
+        <li>Weight gain, especially around abdomen</li>
+        <li>Thinning hair or hair loss</li>
+        <li>Difficulty getting pregnant</li>
+      </ul>
+      <div class="health-sub-title">Management Tips</div>
+      <ul class="health-list">
+        <li>Maintain a healthy weight through diet and exercise</li>
+        <li>Eat low-glycemic index foods</li>
+        <li>Exercise regularly (30 min/day)</li>
+        <li>Manage stress with yoga and meditation</li>
+        <li>Consult a gynecologist for hormonal treatment</li>
+      </ul>
+      <div class="health-sub-title">Prevention</div>
+      <ul class="health-list">
+        <li>Avoid processed foods and sugar</li>
+        <li>Maintain healthy BMI</li>
+        <li>Regular health check-ups</li>
+      </ul>
+    </div>
+
+    <!-- ANEMIA -->
+    <div class="health-card anemia">
+      <span class="health-card-icon">🩸</span>
+      <h3>Anemia — Iron Deficiency</h3>
+      <div class="health-sub-title">Symptoms</div>
+      <ul class="health-list">
+        <li>Constant fatigue and weakness</li>
+        <li>Pale skin and nails</li>
+        <li>Shortness of breath</li>
+        <li>Dizziness and headaches</li>
+        <li>Cold hands and feet</li>
+        <li>Brittle nails and hair loss</li>
+      </ul>
+      <div class="health-sub-title">Management Tips</div>
+      <ul class="health-list">
+        <li>Eat iron-rich foods (spinach, lentils, red meat)</li>
+        <li>Take iron supplements as prescribed</li>
+        <li>Pair iron with Vitamin C for better absorption</li>
+        <li>Avoid tea/coffee with meals (blocks iron)</li>
+        <li>Get regular blood tests (CBC)</li>
+      </ul>
+      <div class="health-sub-title">Prevention</div>
+      <ul class="health-list">
+        <li>Include iron-rich foods in every meal</li>
+        <li>Regular hemoglobin checks</li>
+        <li>Treat heavy periods promptly</li>
+      </ul>
+    </div>
+
+    <!-- THYROID -->
+    <div class="health-card thyroid">
+      <span class="health-card-icon">🦋</span>
+      <h3>Thyroid Disorders</h3>
+      <div class="health-sub-title">Symptoms (Hypothyroid)</div>
+      <ul class="health-list">
+        <li>Unexplained weight gain</li>
+        <li>Fatigue and sluggishness</li>
+        <li>Feeling cold all the time</li>
+        <li>Dry skin and hair loss</li>
+        <li>Depression and brain fog</li>
+        <li>Irregular periods</li>
+      </ul>
+      <div class="health-sub-title">Management Tips</div>
+      <ul class="health-list">
+        <li>Take prescribed thyroid medication consistently</li>
+        <li>Eat iodine-rich foods (seafood, iodized salt)</li>
+        <li>Avoid goitrogens in excess (raw cabbage, soy)</li>
+        <li>Exercise regularly to boost metabolism</li>
+        <li>Get TSH levels checked every 6 months</li>
+      </ul>
+      <div class="health-sub-title">Prevention</div>
+      <ul class="health-list">
+        <li>Adequate iodine intake</li>
+        <li>Avoid environmental toxins</li>
+        <li>Annual thyroid screening after 35</li>
+      </ul>
+    </div>
+
+    <!-- STRESS -->
+    <div class="health-card stress">
+      <span class="health-card-icon">🧠</span>
+      <h3>Stress & Mental Wellness</h3>
+      <div class="health-sub-title">Symptoms</div>
+      <ul class="health-list">
+        <li>Persistent anxiety and worry</li>
+        <li>Sleep disturbances (insomnia)</li>
+        <li>Headaches and muscle tension</li>
+        <li>Irritability and mood swings</li>
+        <li>Difficulty concentrating</li>
+        <li>Digestive issues (IBS)</li>
+      </ul>
+      <div class="health-sub-title">Management Tips</div>
+      <ul class="health-list">
+        <li>Practice daily meditation (10 min)</li>
+        <li>Exercise regularly — releases endorphins</li>
+        <li>Maintain a consistent sleep schedule</li>
+        <li>Talk to a therapist or counselor</li>
+        <li>Limit social media and screen time</li>
+      </ul>
+      <div class="health-sub-title">Prevention</div>
+      <ul class="health-list">
+        <li>Build strong social support network</li>
+        <li>Set healthy work-life boundaries</li>
+        <li>Practice gratitude journaling</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- SELF-CHECK QUIZ -->
+  <div class="card quiz-card" style="margin-bottom:1.5rem;">
+    <div class="card-title" data-lang="selfCheck">🩺 Self-Check Quiz</div>
+    <p style="font-size:0.88rem;color:var(--text-muted);margin-bottom:1rem;">Answer a few questions to get a general health insight. This is not a medical diagnosis.</p>
+
+    <!-- START BUTTON -->
+    <div id="quizStart">
+      <button class="btn btn-primary" onclick="startQuiz()" data-lang="startQuiz">🩺 Start Self-Check</button>
+    </div>
+
+    <!-- QUIZ AREA -->
+    <div id="quizArea" style="display:none;">
+      <div class="quiz-question" id="quizQ">Loading question...</div>
+      <div class="quiz-btns">
+        <button class="btn btn-mint" onclick="answerQuiz('yes')">✅ Yes</button>
+        <button class="btn btn-coral" onclick="answerQuiz('no')">❌ No</button>
+      </div>
+    </div>
+
+    <!-- RESULT AREA -->
+    <div id="quizResultArea" style="display:none;">
+      <div class="quiz-result-text" id="quizResult"></div>
+      <button class="btn btn-outline" onclick="resetQuiz()" style="margin-top:0.75rem;">🔄 Take Again</button>
+    </div>
+  </div>
+
+  <!-- WHEN TO SEE DOCTOR -->
+  <div class="card" style="margin-bottom:1.5rem;">
+    <div class="card-title" data-lang="whenToSeeDoctor">🏥 When to See a Doctor</div>
+    <div class="grid-2">
+      <div>
+        <div class="health-sub-title" style="color:var(--coral-dark);">🚨 Seek Immediate Help</div>
+        <ul class="item-list">
+          <li>Severe chest pain or difficulty breathing</li>
+          <li>Heavy vaginal bleeding (soaking pad hourly)</li>
+          <li>Sudden severe abdominal pain</li>
+          <li>High fever with pelvic pain</li>
+          <li>Signs of miscarriage during pregnancy</li>
+          <li>Severe dizziness or fainting</li>
+        </ul>
+      </div>
+      <div>
+        <div class="health-sub-title" style="color:var(--blue-dark);">📅 Schedule an Appointment</div>
+        <ul class="item-list">
+          <li>Periods absent for 3+ months</li>
+          <li>Unusual discharge or odor</li>
+          <li>Persistent fatigue despite rest</li>
+          <li>Unexplained weight changes</li>
+          <li>Mood changes lasting weeks</li>
+          <li>Annual gynecological check-up</li>
+        </ul>
+      </div>
+    </div>
+    <div class="alert alert-yellow" style="margin-top:1rem;">
+      ⚠️ <strong>Remember:</strong> Early detection saves lives. Don't ignore persistent symptoms. Regular check-ups are essential for every woman.
+    </div>
+  </div>
+
+</div>
+
+<!-- POPUP -->
+<div class="popup-overlay" id="popupOverlay">
+  <div class="popup-box">
+    <span class="popup-icon" id="popupIcon">💊</span>
+    <div class="popup-title" id="popupTitle">Health Info</div>
+    <div class="popup-msg" id="popupMessage">Loading...</div>
+    <button class="btn btn-primary" onclick="closePopup()" data-lang="gotIt">Got it</button>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
